@@ -18,6 +18,8 @@ ready environment
 
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+
 ## Recommended
 
 - [Night Owl](https://marketplace.visualstudio.com/items?itemName=sdras.night-owl)
