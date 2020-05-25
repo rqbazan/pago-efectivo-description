@@ -1,5 +1,3 @@
-const PROD = process.env.NODE_ENV === 'production'
-
 module.exports = {
   plugins: [
     'tailwindcss',
@@ -12,15 +10,6 @@ module.exports = {
         },
         browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']
       }
-    ],
-    PROD && [
-      '@fullhuman/postcss-purgecss',
-      {
-        content: ['./src/**/*.js'],
-        whitelistPatterns: [/token/, /plain/],
-        defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
-      }
-    ],
-    PROD && ['cssnano', { preset: 'default' }]
-  ].filter(Boolean)
+    ]
+  ]
 }

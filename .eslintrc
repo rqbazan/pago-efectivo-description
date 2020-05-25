@@ -2,7 +2,9 @@
   "extends": "rqbazan-js/react",
   "settings": {
     "import/resolver": {
-      "babel-module": {}
+      "alias": {
+        "map": [["~", "./src"]]
+      }
     }
   }
 }
