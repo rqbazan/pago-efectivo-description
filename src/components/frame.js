@@ -111,9 +111,7 @@ export function Frame({ className, children }) {
           {buttonText}
         </button>
       </div>
-      <div id="a" ref={childrenRef}>
-        {children}
-      </div>
+      <div ref={childrenRef}>{children}</div>
     </div>
   )
 }
