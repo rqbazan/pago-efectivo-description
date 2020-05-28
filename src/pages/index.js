@@ -20,7 +20,7 @@ export default function IndexPage() {
               <footer className="h-5 mt-6 ml-5">
                 <img
                   className="h-full w-auto"
-                  src="https://res.cloudinary.com/riqra/image/upload/v1590444142/sellers/resources/pagoefectivo-logos-1.png"
+                  src="https://res.cloudinary.com/riqra/image/upload/v1590704424/sellers/resources/pagoefectivo-logos-3.png"
                   alt="Logos"
                 />
               </footer>
