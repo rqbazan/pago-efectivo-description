@@ -73,7 +73,7 @@ export function Frame({ className, children }) {
 
   const [buttonText, setButtonText] = useTimeoutText('Copy HTML')
 
-  const [clip, setClip] = useState('')
+  const [clipboardText, setClipboardText] = useState('')
 
   useEffect(() => {
     const [original] = childrenRef.current.querySelectorAll('.pagoefectivo')
@@ -96,7 +96,7 @@ export function Frame({ className, children }) {
 
     temp.appendChild(rootEl)
 
-    setClip(temp.innerHTML)
+    setClipboardText(temp.innerHTML)
   }, [children])
 
   return (
@@ -104,7 +104,7 @@ export function Frame({ className, children }) {
       <div className="absolute right-0 m-4">
         <button
           onClick={() => setButtonText('Copied!')}
-          data-clipboard-text={clip}
+          data-clipboard-text={clipboardText}
           type="button"
           className="btn-copy text-sm bg-yellow-400 hover:bg-yellow-500 rounded px-4 py-1 focus:outline-none"
         >
