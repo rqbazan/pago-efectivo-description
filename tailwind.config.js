@@ -1,6 +1,12 @@
 module.exports = {
   purge: ['./src/**/*.js'],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        anchor: '#ED7700'
+      }
+    }
+  },
   variants: {},
   plugins: []
 }
