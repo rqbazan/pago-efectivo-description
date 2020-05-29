@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react'
+import multiline from 'multiline-template'
 import ClipboardJS from 'clipboard'
 import { Description } from '~/components/description'
 import { Frame } from '~/components/frame'
+
+function getLogoNames(start, end) {
+  const sequence = Array.from({ length: end - start + 1 }).map(
+    (v, i) => start + i
+  )
+
+  return sequence.map(i => String(i).padStart(2, '0'))
+}
 
 export default function IndexPage() {
   useEffect(() => {
@@ -15,16 +24,11 @@ export default function IndexPage() {
         <header className="text-sm font-bold p-2">Ecuador</header>
         <Frame>
           <Description
-            content="Transferencias bancarias vía PagoEfectivo - Paga en efectivo en Western Union Red Activa, Facilito y Amlacenes TIA a nivel nacional. ¿Cómo funciona PagoEfectivo?"
-            footer={
-              <footer className="h-5 mt-6 ml-5">
-                <img
-                  className="h-full w-auto"
-                  src="https://res.cloudinary.com/riqra/image/upload/v1590704424/sellers/resources/pagoefectivo-logos-3.png"
-                  alt="Logos"
-                />
-              </footer>
-            }
+            logoNames={getLogoNames(1, 5)}
+            content={multiline`
+              |Transferencias bancarias vía PagoEfectivo - Paga en efectivo
+              |en Western Union Red Activa, Facilito y Amlacenes TIA a nivel nacional.
+            `}
           />
         </Frame>
       </section>
@@ -32,30 +36,23 @@ export default function IndexPage() {
         <header className="text-sm font-bold p-2">Peru</header>
         <Frame className="mb-4">
           <Description
-            content="Depósitos en Efectivo vía PagoEfectivo - Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Western Union, Tambo+, Kasnet, Full Carga, Red Digital, Money Gram, Caja Arequipa, Disashop, Banco de la Nación, en cualquier agente o agencia autorizada a nivel nacional a la cuenta de PagoEfectivo."
-            footer={
-              <footer className="h-12 mt-6 ml-5">
-                <img
-                  className="h-full w-auto"
-                  src="https://res.cloudinary.com/riqra/image/upload/v1590444143/sellers/resources/pagoefectivo-logos-2.png"
-                  alt="Logos"
-                />
-              </footer>
-            }
+            logoNames={getLogoNames(1, 14)}
+            content={multiline`
+              |Depósitos en Efectivo vía PagoEfectivo - Paga en BBVA, BCP, Interbank,
+              |Scotiabank, BanBif, Western Union, Tambo+, Kasnet, Full Carga, Red Digital,
+              |Money Gram, Caja Arequipa, Disashop, Banco de la Nación, en cualquier
+              |agente o agencia autorizada a nivel nacional a la cuenta de PagoEfectivo.
+            `}
           />
         </Frame>
         <Frame>
           <Description
-            content="Transferencias bancarias vía PagoEfectivo - Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa, a través de la banca por internet o banca móvil en la opción pago de servicios."
-            footer={
-              <footer className="h-5 mt-6 ml-5">
-                <img
-                  className="h-full w-auto"
-                  src="https://res.cloudinary.com/riqra/image/upload/v1590444142/sellers/resources/pagoefectivo-logos-1.png"
-                  alt="Logos"
-                />
-              </footer>
-            }
+            logoNames={getLogoNames(15, 18)}
+            content={multiline`
+              |Transferencias bancarias vía PagoEfectivo - Paga en BBVA, BCP, Interbank,
+              |Scotiabank, BanBif, Caja Arequipa, a través de la banca por internet o
+              |banca móvil en la opción pago de servicios.
+            `}
           />
         </Frame>
       </section>

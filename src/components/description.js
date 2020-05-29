@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function Description({ content, footer }) {
+export function Description({ content, logoNames }) {
   return (
     <div className="bg-gray-200 px-8 py-6">
       <div className="pagoefectivo" style={{ fontSize: 12 }}>
@@ -21,7 +21,17 @@ export function Description({ content, footer }) {
             </span>
           </li>
         </ul>
-        {footer}
+        <footer className="grid mt-6 ml-5 gap-2 grid-cols-4 break:grid-cols-auto-4">
+          {logoNames.map(name => (
+            <div className="h-5 w-16 flex justify-center w-full" key={name}>
+              <img
+                className="h-full object-contain"
+                src={`https://res.cloudinary.com/riqra/image/upload/v1590708129/sellers/resources/pago-efectivo-logos/${name}.png`}
+                alt="Logo"
+              />
+            </div>
+          ))}
+        </footer>
       </div>
     </div>
   )
