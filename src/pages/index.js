@@ -24,7 +24,7 @@ export default function IndexPage() {
         <header className="text-sm font-bold p-2">Ecuador</header>
         <Frame>
           <Description
-            logoNames={getLogoNames(1, 5)}
+            logoNames={getLogoNames(15, 18)}
             content={multiline`
               |Transferencias bancarias vía PagoEfectivo - Paga en efectivo
               |en Western Union Red Activa, Facilito y Amlacenes TIA a nivel nacional.
@@ -47,7 +47,7 @@ export default function IndexPage() {
         </Frame>
         <Frame>
           <Description
-            logoNames={getLogoNames(15, 18)}
+            logoNames={getLogoNames(1, 5)}
             content={multiline`
               |Transferencias bancarias vía PagoEfectivo - Paga en BBVA, BCP, Interbank,
               |Scotiabank, BanBif, Caja Arequipa, a través de la banca por internet o
