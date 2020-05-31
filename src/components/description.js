@@ -44,7 +44,7 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
               <a
                 href="https://youtu.be/wh7w1n7_5F0"
                 target="__blank"
-                className="text-anchor"
+                style={{ color: '#ED7700' }}
               >
                 ¿Cómo funciona PagoEfectivo?
               </a>
