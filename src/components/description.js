@@ -28,8 +28,12 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
         <ul className="list-disc ml-5">
           <li>
             {content}{' '}
-            <span className="font-semibold text-anchor">
-              <a href="https://youtu.be/wh7w1n7_5F0" target="__blank">
+            <span className="font-semibold">
+              <a
+                href="https://youtu.be/wh7w1n7_5F0"
+                target="__blank"
+                className="text-anchor"
+              >
                 ¿Cómo funciona PagoEfectivo?
               </a>
             </span>
