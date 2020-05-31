@@ -56,7 +56,7 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
             <div className="h-5 w-16 flex justify-center w-full" key={name}>
               <img
                 className="h-full object-contain"
-                src={`https://res.cloudinary.com/riqra/image/upload/v1590708129/sellers/resources/pago-efectivo-logos/${name}.png`}
+                src={`https://res.cloudinary.com/riqra/image/upload/v1590968100/sellers/resources/pago-efectivo-logos/${name}.png`}
                 alt="Logo"
               />
             </div>
