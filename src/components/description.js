@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useImperativeHandle, useRef } from 'react'
+import memoizeOne from 'memoize-one'
+import { getPlainHtml } from '~/utils/get-plain-html'
 
-export function Description({ content, logoNames }) {
+const memoizedGetPlainHtml = memoizeOne(getPlainHtml)
+
+export const Description = React.forwardRef(({ content, logoNames }, ref) => {
+  const containerRef = useRef()
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      getPlainHtml: () => memoizedGetPlainHtml(containerRef.current)
+    }),
+    []
+  )
+
   return (
     <div className="bg-gray-200 px-8 py-6">
-      <div className="pagoefectivo" style={{ fontSize: 12 }}>
+      <div style={{ fontSize: 12 }} ref={containerRef}>
         <header className="h-10 mb-8">
           <img
             className="h-full w-auto"
@@ -35,4 +49,4 @@ export function Description({ content, logoNames }) {
       </div>
     </div>
   )
-}
+})

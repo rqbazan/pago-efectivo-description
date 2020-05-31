@@ -1,72 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import CSSSteal from 'css-steal'
-
-function useTimeoutText(initialText) {
-  const timerIdRef = useRef()
-
-  const [text, setText] = useState(initialText)
-
-  useEffect(() => {
-    return () => clearTimeout(timerIdRef.current)
-  }, [])
-
-  return [
-    text,
-    newText => {
-      setText(newText)
-
-      timerIdRef.current = setTimeout(() => {
-        setText(initialText)
-      }, 1000)
-    }
-  ]
-}
-
-function getStylesMap(el) {
-  const css = CSSSteal(el)
-
-  const selectorStyles = css.toJS()
-
-  return selectorStyles.reduce((acc, { selector, styles }) => {
-    if (!selector.includes(',')) {
-      acc[selector] = styles
-    } else {
-      selector
-        .split(',')
-        .map(s => s.trim())
-        .forEach(s => {
-          acc[s] = styles
-        })
-    }
-
-    return acc
-  }, {})
-}
-
-function setInlineStyle(el, stylesMap) {
-  const tagName = el.nodeName.toLowerCase()
-
-  const inlineStyles = {
-    ...stylesMap[tagName]
-  }
-
-  if (el.classList) {
-    el.classList.forEach(name => {
-      Object.assign(inlineStyles, stylesMap[`.${name}`])
-    })
-  }
-
-  if (el.style) {
-    Object.assign(el.style, inlineStyles)
-  } else {
-    // eslint-disable-next-line no-param-reassign
-    el.style = inlineStyles
-  }
-
-  if (el.removeAttribute) {
-    el.removeAttribute('class')
-  }
-}
+import { useTimeoutText } from '~/hooks/use-timeout-text'
 
 export function Frame({ className, children }) {
   const childrenRef = useRef()
@@ -76,28 +9,8 @@ export function Frame({ className, children }) {
   const [clipboardText, setClipboardText] = useState('')
 
   useEffect(() => {
-    const [original] = childrenRef.current.querySelectorAll('.pagoefectivo')
-
-    const rootEl = original.cloneNode(true)
-
-    const stylesMap = getStylesMap(rootEl)
-
-    function setInlineStyles(el) {
-      setInlineStyle(el, stylesMap)
-
-      for (let i = 0; i < el.childNodes.length; i++) {
-        setInlineStyles(el.childNodes[i])
-      }
-    }
-
-    setInlineStyles(rootEl)
-
-    const temp = document.createElement('div')
-
-    temp.appendChild(rootEl)
-
-    setClipboardText(temp.innerHTML)
-  }, [children])
+    setClipboardText(childrenRef.current.getPlainHtml())
+  }, [childrenRef.current?.getPlainHtml() ?? ''])
 
   return (
     <div className={`relative ${className}`}>
@@ -111,7 +24,7 @@ export function Frame({ className, children }) {
           {buttonText}
         </button>
       </div>
-      <div ref={childrenRef}>{children}</div>
+      {React.cloneElement(children, { ref: childrenRef })}
     </div>
   )
 }
