@@ -47,7 +47,7 @@ export default function IndexPage() {
         </Frame>
         <Frame>
           <Description
-            logoNames={getLogoNames(1, 5)}
+            logoNames={[...getLogoNames(1, 5), '12']}
             content={multiline`
               |Transferencias bancarias vía PagoEfectivo - Paga en BBVA, BCP, Interbank,
               |Scotiabank, BanBif, Caja Arequipa, a través de la banca por internet o
