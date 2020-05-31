@@ -46,7 +46,7 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
                 target="__blank"
                 className="text-anchor"
               >
-                ¿Cómo funciona PagoEfectivo?
+                ¿Cómo funciona PagoEfectivo?
               </a>
             </span>
           </li>
