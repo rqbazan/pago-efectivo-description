@@ -1,23 +1,28 @@
 import React, { useImperativeHandle, useRef } from 'react'
 import memoizeOne from 'memoize-one'
+import { useDeepCompareMemoize } from '@desync/use-deep-compare-memoize'
 import { getPlainHtml } from '~/utils/get-plain-html'
-
-const memoizedGetPlainHtml = memoizeOne(getPlainHtml)
 
 export const Description = React.forwardRef(({ content, logoNames }, ref) => {
   const containerRef = useRef()
 
+  const innerContainerRef = useRef()
+
   useImperativeHandle(
     ref,
-    () => ({
-      getPlainHtml: () => memoizedGetPlainHtml(containerRef.current)
-    }),
-    []
+    () => {
+      const memoizedGetPlainHtml = memoizeOne(getPlainHtml)
+
+      return {
+        getPlainHtml: () => memoizedGetPlainHtml(innerContainerRef.current)
+      }
+    },
+    useDeepCompareMemoize([content, logoNames])
   )
 
   return (
-    <div className="bg-gray-200 px-8 py-6">
-      <div style={{ fontSize: 12 }} ref={containerRef}>
+    <div className="bg-gray-200 px-8 py-6" ref={containerRef}>
+      <div style={{ fontSize: 12 }} ref={innerContainerRef}>
         <header className="h-10 mb-8">
           <img
             className="h-full w-auto"

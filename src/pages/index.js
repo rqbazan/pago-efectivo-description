@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import multiline from 'multiline-template'
-import ClipboardJS from 'clipboard'
 import { Description } from '~/components/description'
 import { Frame } from '~/components/frame'
 
@@ -13,11 +12,6 @@ function getLogoNames(start, end) {
 }
 
 export default function IndexPage() {
-  useEffect(() => {
-    // eslint-disable-next-line no-new
-    new ClipboardJS('.btn-copy')
-  }, [])
-
   return (
     <div className="max-w-2xl mx-auto">
       <section className="pb-6 border-b-4 border-gray-800">

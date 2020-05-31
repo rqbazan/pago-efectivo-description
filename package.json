@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "clipboard": "^2.0.6",
+    "@desync/use-deep-compare-memoize": "^0.4.1",
     "css-steal": "^1.0.4",
     "memoize-one": "^5.1.1",
     "multiline-template": "^1.1.0",

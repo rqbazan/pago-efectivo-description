@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { useTimeoutText } from '~/hooks/use-timeout-text'
 
 export function Frame({ className, children }) {
@@ -6,20 +6,33 @@ export function Frame({ className, children }) {
 
   const [buttonText, setButtonText] = useTimeoutText('Copy HTML')
 
-  const [clipboardText, setClipboardText] = useState('')
+  function onCopyClick() {
+    const textarea = document.createElement('textarea')
 
-  useEffect(() => {
-    setClipboardText(childrenRef.current.getPlainHtml())
-  }, [childrenRef.current?.getPlainHtml() ?? ''])
+    textarea.value = childrenRef.current.getPlainHtml()
+
+    document.body.appendChild(textarea)
+
+    textarea.select()
+
+    document.execCommand('copy')
+
+    document.body.removeChild(textarea)
+
+    setButtonText('Copied!')
+  }
 
   return (
     <div className={`relative ${className}`}>
       <div className="absolute right-0 m-4">
         <button
-          onClick={() => setButtonText('Copied!')}
-          data-clipboard-text={clipboardText}
+          onClick={onCopyClick}
+          disabled={
+            typeof document !== 'undefined' &&
+            !document.queryCommandSupported('copy')
+          }
           type="button"
-          className="btn-copy text-sm bg-yellow-400 hover:bg-yellow-500 rounded px-4 py-1 focus:outline-none"
+          className="text-sm bg-yellow-400 hover:bg-yellow-500 rounded px-4 py-1 focus:outline-none"
         >
           {buttonText}
         </button>

@@ -51,6 +51,7 @@ export function getPlainHtml(originalEl) {
 
   const stylesMap = getStylesMap(rootEl)
 
+  // eslint-disable-next-line no-inner-declarations
   function setInlineStyles(el) {
     setInlineStyle(el, stylesMap)
 
@@ -61,9 +62,5 @@ export function getPlainHtml(originalEl) {
 
   setInlineStyles(rootEl)
 
-  const temp = document.createElement('div')
-
-  temp.appendChild(rootEl)
-
-  return temp.innerHTML
+  return rootEl.outerHTML
 }
