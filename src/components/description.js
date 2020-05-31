@@ -29,9 +29,6 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
                 grid-template-columns: repeat(auto-fill, 4rem);
             }
           }
-          img {
-            border: none;
-          }
         `}</style>
         <header className="h-10 mb-8">
           <img
