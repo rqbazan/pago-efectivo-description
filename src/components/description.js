@@ -23,6 +23,16 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
   return (
     <div className="bg-gray-200 px-8 py-6" ref={containerRef}>
       <div style={{ fontSize: 12 }} ref={innerContainerRef}>
+        <style>{`
+          @media (min-width: 440px) {
+            .break\\:grid-cols-auto-4 {
+                grid-template-columns: repeat(auto-fill, 4rem);
+            }
+          }
+          img {
+            border: none;
+          }
+        `}</style>
         <header className="h-10 mb-8">
           <img
             className="h-full w-auto"

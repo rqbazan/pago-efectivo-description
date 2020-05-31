@@ -1,66 +1,28 @@
 import CSSSteal from 'css-steal'
+import minify from 'string-minify'
 
-function getStylesMap(el) {
-  const css = CSSSteal(el)
+function getCSS(el, blockedSelectors) {
+  return CSSSteal(el)
+    .toJS()
+    .filter(item => !blockedSelectors.some(s => s === item.selector))
+    .map(item => {
+      const cssRules = Object.keys(item.styles)
+        .map(ruleName => `${ruleName}: ${item.styles[ruleName]};`)
+        .join('')
 
-  const selectorStyles = css.toJS()
-
-  return selectorStyles.reduce((acc, { selector, styles }) => {
-    if (!selector.includes(',')) {
-      acc[selector] = styles
-    } else {
-      selector
-        .split(',')
-        .map(s => s.trim())
-        .forEach(s => {
-          acc[s] = styles
-        })
-    }
-
-    return acc
-  }, {})
-}
-
-function setInlineStyle(el, stylesMap) {
-  const tagName = el.nodeName.toLowerCase()
-
-  const inlineStyles = {
-    ...stylesMap[tagName]
-  }
-
-  if (el.classList) {
-    el.classList.forEach(name => {
-      Object.assign(inlineStyles, stylesMap[`.${name}`])
+      return `${item.selector}{${cssRules}}`
     })
-  }
-
-  if (el.style) {
-    Object.assign(el.style, inlineStyles)
-  } else {
-    // eslint-disable-next-line no-param-reassign
-    el.style = inlineStyles
-  }
-
-  if (el.removeAttribute) {
-    el.removeAttribute('class')
-  }
+    .join('')
 }
 
-export function getPlainHtml(originalEl) {
+export function getPlainHtml(originalEl, blockedSelectors = ['img']) {
   const rootEl = originalEl.cloneNode(true)
 
-  const stylesMap = getStylesMap(rootEl)
+  const style = document.createElement('style')
 
-  // eslint-disable-next-line no-inner-declarations
-  function setInlineStyles(el) {
-    setInlineStyle(el, stylesMap)
+  style.innerHTML = getCSS(rootEl, blockedSelectors)
 
-    for (let i = 0; i < el.childNodes.length; i++) {
-      setInlineStyles(el.childNodes[i])
-    }
-  }
+  rootEl.insertBefore(style, rootEl.firstChild)
 
-  setInlineStyles(rootEl)
-
-  return rootEl.outerHTML
+  return minify(rootEl.outerHTML)
 }
