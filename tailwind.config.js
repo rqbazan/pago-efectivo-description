@@ -1,14 +1,5 @@
 module.exports = {
   purge: ['./src/**/*.js'],
-  theme: {
-    extend: {
-      gridTemplateColumns: {
-        'auto-4': 'repeat(auto-fill, 4rem)'
-      },
-      screens: {
-        break: '440px'
-      }
-    }
-  },
+  theme: {},
   plugins: []
 }

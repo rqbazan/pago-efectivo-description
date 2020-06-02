@@ -24,9 +24,17 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
     <div className="bg-gray-200 px-8 py-6" ref={containerRef}>
       <div style={{ fontSize: 12 }} ref={innerContainerRef}>
         <style>{`
+          .custom-grid-cols-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            @media (min-width: 440px) {
+              grid-template-columns: repeat(auto-fill, 4rem);
+            }
+          }
+
           @media (min-width: 440px) {
-            .break\\:grid-cols-auto-4 {
-                grid-template-columns: repeat(auto-fill, 4rem);
+            .custom-grid-cols-4 {
+              grid-template-columns: repeat(auto-fill, 4rem);
             }
           }
         `}</style>
@@ -51,7 +59,7 @@ export const Description = React.forwardRef(({ content, logoNames }, ref) => {
             </span>
           </li>
         </ul>
-        <footer className="grid mt-6 ml-5 gap-2 grid-cols-4 break:grid-cols-auto-4">
+        <footer className="grid mt-6 ml-5 gap-2 custom-grid-cols-4">
           {logoNames.map(name => (
             <div className="h-5 w-16 flex justify-center w-full" key={name}>
               <img
